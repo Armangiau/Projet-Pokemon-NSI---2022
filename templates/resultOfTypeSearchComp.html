@@ -1,0 +1,8 @@
+<div class="grid grid-cols-4 gap-6 m-6 auto-fill-96 justify-items-center">    
+    {% for PokemonsDescription, selectedPokemonName in zip(PokemonsDescriptions, selectedPokemonsNames) %}
+      <div>
+        {{ PokemonsDescription | safe }}
+        <a href="http://127.0.0.1:5000/resultOfSearch?name={{ selectedPokemonName }}" class="btn btn-secondary flex justify-center align-middle w-32 mx-auto mt-3">Comparer ce pokemon</a>
+      </div>
+    {% endfor %}
+</div>

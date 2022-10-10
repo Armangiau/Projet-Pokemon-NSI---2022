@@ -1,0 +1,201 @@
+  <h2 class="text-xl text-center mb-3">
+    Chercher un pokemon selon ses caractéristiques
+  </h2>
+
+  <div>
+    <label for="type1" class="w-44 inline-block">Premier type (en): </label>
+    <br class="md:hidden" />
+    <input
+      type="text"
+      name="type1"
+      id="type1"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+    />
+  </div>
+
+  <div>
+    <label for="type2" class="w-44 inline-block">Second type (en): </label>
+    <br class="md:hidden" />
+    <input
+      type="text"
+      name="type2"
+      id="type2"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+    />
+  </div>
+
+  <div>
+    <label for="totalptsmin" class="w-44 inline-block"
+      >Total de points entre:
+    </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="totalptsmin"
+      id="totalptsmin"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+    <label for="totalptsmax">et</label>
+    <input
+      type="number"
+      name="totalptsmax"
+      id="totalptsmax"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label for="vieptsmin" class="w-44 inline-block"
+      >Points de vie entre:
+    </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="vieptsmin"
+      id="vieptsmin"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+    <label for="vieptsmax">et</label>
+    <input
+      type="number"
+      name="vieptsmax"
+      id="vieptsmax"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label for="attaqueptsmin" class="w-44 inline-block"
+      >Points d'attaque entre:
+    </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="attaqueptsmin"
+      id="attaqueptsmin"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+    <label for="attaqueptsmax">et</label>
+    <input
+      type="number"
+      name="attaqueptsmax"
+      id="attaqueptsmax"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label for="defenceptsmin" class="w-44 inline-block"
+      >Points de défense entre:
+    </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="defenceptsmin"
+      id="defenceptsmin"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+    <label for="defenceptsmax">et</label>
+    <input
+      type="number"
+      name="defenceptsmax"
+      id="defenceptsmax"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label for="attaquespemin" class="w-44 inline-block"
+      >Attaque spéciale entre:
+    </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="attaquespemin"
+      id="attaquespemin"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+    <label for="attaquespemax">et</label>
+    <input
+      type="number"
+      name="attaquespemax"
+      id="attaquespemax"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label for="defencespemin" class="w-44 inline-block"
+      >Défence spéciale entre:
+    </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="defencespemin"
+      id="defencespemin"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+    <label for="defencespemax">et</label>
+    <input
+      type="number"
+      name="defencespemax"
+      id="defencespemax"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label for="vitessemin" class="w-44 inline-block">Vitesse: </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="vitessemin"
+      id="vitessemin"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+    <label for="vitessemax">et</label>
+    <input
+      type="number"
+      name="vitessemax"
+      id="vitessemax"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label for="generation" class="w-44 inline-block">Génération: </label>
+    <br class="md:hidden" />
+    <input
+      type="number"
+      name="generation"
+      id="generation"
+      min="0"
+      class="input input-bordered input-primary input-sm inline-block w-32 mx-5 my-2"
+    />
+  </div>
+
+  <div>
+    <label for="legendaire" class="w-44 inline-block">Légendaire: </label>
+    <input
+      type="checkbox"
+      name="legendaire"
+      id="legendaire"
+      class="toggle toggle-primary inline-block mx-5 my-2 align-middle"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Rechercher</button>

@@ -1,0 +1,159 @@
+{% extends "blankPage.html" %} {% block content %}
+<div
+  class="grid grid-cols-2 grid-rows-2-(0-150) gap-4 lg:grid-cols-3 lg:grid-rows-1 justify-items-center"
+>
+  {% include 'pokemonDescription.html' %}
+  <div id="result"></div>
+  <div
+    class="col-start-1 col-end-3 row-start-2 lg:col-start-2 lg:row-start-1 w-full h-full relative"
+  >
+    <div class="tabs tabs-boxed w-72 mx-auto justify-center">
+      <a class="tab tab-active" id="Tab1">Par nom</a>
+      <a class="tab" id="Tab2">Par caractéristiques</a>
+    </div>
+    <form
+      id="compareName"
+      class="flex flex-col absolute lg:transform lg:-translate-y-1/2 lg:top-1/2 w-full transition-opacity duration-300 ease-in-out opacity-1 z-10"
+    >
+      <label for="compareWith">Comparez {{ pokemonInfos[1] }} avec ...</label>
+      <input
+        type="search"
+        name="compareWith"
+        placeholder="Nom du pokemon"
+        id="compareWith"
+        list="pokemonSuggestion"
+        class="my-4 input input-bordered input-primary"
+      />
+      <datalist id="pokemonSuggestion">
+        {% for pokemonName in pokemonNames %}
+        <option>{{ pokemonName[0] }}</option>
+        {% endfor %}
+      </datalist>
+      <button type="submit" class="btn btn-primary">Comparer</button>
+    </form>
+    <form
+      action="/resultTypeSearch"
+      method="post"
+      class="flex flex-col absolute w-full transition-opacity duration-300 ease-in-out opacity-0 -z-10"
+      id="compareType"
+    >
+      {% include 'searchTypesComponent.html' %}
+    </form>
+  </div>
+</div>
+<div class="modal" id="modalType">
+  <div class="modal-box w-11/12 h-11/12 max-h-screen max-w-full">
+    <h3 class="font-bold text-lg">Comparer</h3>
+    <div class="py-4" id="resultType"></div>
+    <div class="modal-action">
+      <button id="closeModal" class="btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+  'use strict'
+  const compareNameForm = document.body.querySelector('#compareName')
+  const nameInput = document.body.querySelector('#compareWith')
+  const result = document.body.querySelector('#result')
+  compareNameForm.addEventListener('submit', evt => {
+    evt.preventDefault()
+
+    const request = {
+      name: nameInput.value
+    }
+
+    fetch('http://127.0.0.1:5000/compareName', {
+      method: 'POST',
+      body: JSON.stringify(request),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.text())
+      .then(data => {
+        result.innerHTML = data
+      })
+  })
+
+  const tabs = document.body.querySelectorAll('.tab')
+  const forms = document.body.querySelectorAll('form')
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (!tab.classList.contains('tab-active')) {
+        tabs.forEach(tab => tab.classList.toggle('tab-active'))
+        forms.forEach(form =>
+          ['opacity-0', '-z-10', 'opacity-1', 'z-10'].map(className =>
+            form.classList.toggle(className)
+          )
+        )
+      }
+    })
+  })
+
+  const compareTypeForm = document.body.querySelector('#compareType')
+  const TypeInputs = compareTypeForm.querySelectorAll('input')
+
+  compareTypeForm.addEventListener('submit', evt => {
+    evt.preventDefault()
+
+    const modal = document.querySelector('#modalType')
+    const modalClose = document.querySelector('#closeModal')
+    modal.classList.add('modal-open')
+    modalClose.addEventListener('click', () => modal.classList.remove('modal-open'))
+
+    const InputsNames = [
+      'type1',
+      'type2',
+      'totalptsmin',
+      'totalptsmax',
+      'vieptsmin',
+      'vieptsmax',
+      'attaqueptsmin',
+      'attaqueptsmax',
+      'defenceptsmin',
+      'defenceptsmax',
+      'attaquespemin',
+      'attaquespemax',
+      'defencespemin',
+      'defencespemax',
+      'vitessemin',
+      'vitessemax',
+      'generation',
+      'legendaire'
+    ]
+    let request = InputsNames.reduce((prev, current, i) => {
+      prev[current] = TypeInputs[i].value
+      return prev
+    }, {})
+
+    request['legendaire'] = document.getElementById('legendaire').checked
+
+    const canClickOnLinks = () => {
+      const pokemonLinks = document.body.querySelectorAll('#resultType div a')
+        pokemonLinks.forEach(pokemonLink => {
+          pokemonLink.addEventListener('click', evt => {
+            evt.preventDefault()
+            const adjacentCard = pokemonLink.parentElement.querySelector('div')
+            result.innerHTML = adjacentCard.outerHTML
+            modal.classList.remove('modal-open')
+          })
+        })
+    }
+    
+    fetch('http://127.0.0.1:5000/compareType', {
+      method: 'POST',
+      body: JSON.stringify(request),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.text())
+      .then(data => {
+        const resultType = document.body.querySelector('#resultType')
+        resultType.innerHTML = data
+      })
+      .then(canClickOnLinks())
+  })
+</script>
+{% endblock %}

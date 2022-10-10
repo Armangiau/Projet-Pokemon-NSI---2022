@@ -1,0 +1,55 @@
+{% extends "blankPage.html" %} {% block content %}
+<div class="tabs tabs-boxed w-72 mx-auto justify-center">
+  <a class="tab tab-active" id="Tab1">Par nom</a>
+  <a class="tab" id="Tab2">Par caractéristiques</a>
+</div>
+
+<form
+  action="/resultOfSearch"
+  method="get"
+  class="flex flex-col absolute transform -translate-x-1/2 -translate-y-1/2 top-1/3 left-1/2 w-full sm:w-4/5 xl:w-1/3 transition-opacity duration-300 ease-in-out opacity-1 z-10"
+>
+  <label for="name" class="text-xl text-center mb-3"
+    >Choisissez un pokemon</label
+  >
+  <input
+    type="search"
+    name="name"
+    placeholder="Nom du pokemon"
+    id="name"
+    list="pokemonSuggestion"
+    class="my-4 input input-bordered input-primary"
+  />
+  <datalist id="pokemonSuggestion">
+    {% for pokemon in pokemons %}
+    <option>{{ pokemon[0] }}</option>
+    {% endfor %}
+  </datalist>
+  <button type="submit" class="btn btn-primary">Rechercher</button>
+</form>
+<form
+  action="/resultTypeSearch"
+  method="post"
+  class="flex flex-col absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-full sm:w-4/5 xl:w-1/3 transition-opacity duration-300 ease-in-out opacity-0 -z-10"
+>
+  {% include 'searchTypesComponent.html' %}
+</form>
+  <script>
+    const tabs = document.body.querySelectorAll('.tab')
+    const forms = document.body.querySelectorAll('form')
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        if (!tab.classList.contains('tab-active')) {
+          tabs.forEach(tab => tab.classList.toggle('tab-active'))
+          forms.forEach(form =>
+            ['opacity-0', '-z-10', 'opacity-1', 'z-10'].map(className =>
+              form.classList.toggle(className)
+            )
+          )
+        }
+      })
+    })
+  </script>
+  {% endblock %}
+</form>

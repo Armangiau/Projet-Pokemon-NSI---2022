@@ -1,0 +1,34 @@
+<div
+  class="mt-3 lg:mt-10 rounded-lg shadow-xl card w-full lg:w-96 {% if pokemonInfos['legendary'] == 'True' %} border-8 border-gold {% endif %}"
+  style="background-color: hsla( {{ randcolor }}, 100%, 45%, 0.3) ;"
+>
+  <div class="inline-block">
+    <span>pokemon n°{{ pokemonInfos['id'] }}</span>
+    <figure class="h-72 lg:h-120">
+      <img
+        src="https://img.pokemondb.net/artwork/{{ NameForImage }}.jpg"
+        loading="lazy"
+        alt="illutration de {{ pokemonInfos['name'] }}"
+        class="w-full h-auto max-h-72 lg:max-h-120 object-contain"
+      />
+    </figure>
+  </div>
+  <div class="inline-block card-body">
+    <h2 class="text-lg lg:text-xl card-title">{{ pokemonInfos['name'] }}</h2>
+    <ul class="text-sm lg:text-lg">
+      <li>Premier type: {{ pokemonInfos['type1'] }}</li>
+      <li>Second type: {{ pokemonInfos['type2'] }}</li>
+      <li>Total de points: {{ pokemonInfos['total'] }}</li>
+      <li>Points de vie: {{ pokemonInfos['hp'] }}</li>
+      <li>Points d'attaque: {{ pokemonInfos['attack'] }}</li>
+      <li>Points de défense: {{ pokemonInfos['defense'] }}</li>
+      <li>Attaque spéciale: {{ pokemonInfos['spAtk'] }}</li>
+      <li>Défance spéciale: {{ pokemonInfos['spDef'] }}</li>
+      <li>Vitesse: {{ pokemonInfos['speed'] }}</li>
+      <li>Génération: {{ pokemonInfos['generation'] }}</li>
+      {% if pokemonInfos['legendary'] == 'True' %}
+      <li>Légendaire</li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
